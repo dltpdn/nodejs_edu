@@ -9,3 +9,4 @@
 * nodejs[https://nodejs.org/en/]
 * JDK [http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html]
 * Eclipse JavaEE [http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html]
+* Visual Studio Build Tools [http://landinghub.visualstudio.com/visual-cpp-build-tools]
