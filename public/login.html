@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.box {
+	border: 1px solid #3b3b3b;
+	padding: 20px;
+	margin: auto;
+	max-width: 50%;
+	mix-width: 30%;
+}
+
+.box label {
+	display: inline-block;
+	width: 50%;
+	text-align: right;
+}
+
+.box input {
+	
+}
+
+.box #btn_login {
+	margin-left: 50%;
+}
+</style>
+<script type="text/javascript">
+if(window.location.hash === '#fail'){
+	alert('Incorrect Id or Password.');
+}
+</script>
+</head>
+<body>
+	<form method="post" action="login.do">
+		<div class="box">
+			<h1>Login Page.</h1>
+			<div>
+				<label>ID</label><input type="text" name="id" />
+			</div>
+			<div>
+				<label>Password</label><input type="password" name="pwd" />
+			</div>
+			<div>
+				<button type="submit" id="btn_login">login</button>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

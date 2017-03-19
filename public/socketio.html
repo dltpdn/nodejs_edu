@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+//var socket = io.connect('localhost:5555');
+var socket = io.connect();
+socket.on('anna', function(data){
+	console.log(data);
+	document.getElementById('msg').innerHTML = data.msg;
+	socket.emit('elsa', {answer: 'go away anna!'});
+});
+</script>
+</head>
+<body>
+	<h1>WebSocket(Socket.IO)</h1>
+	<div>msg:<span id="msg"></span></div>
+</body>
+</html>

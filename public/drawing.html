@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#wrap:after{
+	content : '';
+	display : block;
+	clear:both;
+}
+#left{
+	width:600px;height:400px;
+	float:left;
+	border: 1px solid #000;
+}
+#right{
+	float:left;
+}
+#canvas{
+	width:100%;
+	height:100%;
+}
+</style>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+function Point(event){
+	this.x = event.pageX - event.target.offsetLeft;
+	this.y = event.pageY - event.target.offsetTop;
+}
+$(function(){
+	var canvas = $('#canvas').get(0);
+	var ctx = canvas.getContext('2d');
+	
+	var width = 1;
+	var isDown = false;
+	var p1,p2;
+	
+	var socket =io.connect();
+	socket.on('draw', function(data){
+		console.log(data);
+		ctx.lineWidth = $('#width').val();
+		ctx.beginPath();
+		ctx.moveTo(data.x1, data.y1);
+		ctx.lineTo(data.x2, data.y2);
+		ctx.stroke();
+	});
+	socket.on('clear', function(data){
+		console.log(data);
+		ctx.beginPath();
+		var w = (data.x2 -data.x1) ;
+		var h = (data.y2-data.y1) ;
+		ctx.clearRect(data.x1, data.y1, w , h );
+	});
+	$('#canvas').on('mousedown', function(event){
+		isDown = true;
+		p1 = new Point(event);
+	});
+	
+	$('#canvas').on('mousemove', function(event){
+		if(isDown){
+			p2 = new Point(event);
+			if($('#clear').prop('checked')){
+				socket.emit('clear', {x1 : p1.x, y1 : p1.y, x2 :p2.x, y2 : p2.y});
+			}else{
+				socket.emit('draw', {x1 : p1.x, y1 : p1.y, x2 :p2.x, y2 : p2.y});
+			}
+			p1 = p2;
+		}
+	});
+	$('#canvas').on('mouseup', function(event){
+		isDown = false;
+	});
+	
+	$('#clear').on('change', function(event){
+		if(this.checked){
+			
+		}
+	});
+});
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="left">
+			<canvas id="canvas" width="600" height="400"></canvas>
+		</div>
+		<div id="right">
+			<div><label>width</label><input type="range" min="1" max="20" id="width" value="1"/></div>
+			<div><label>clear</label><input type="checkbox" id="clear"/></div>
+		</div>
+	</div>
+</body>
+</html>

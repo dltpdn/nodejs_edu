@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+var ws;
+window.onload = function() {
+	var server = document.getElementById("server");
+	var connectBtn = document.getElementById("connect");
+	connectBtn.addEventListener('click', connect);
+	var disconnBtn = document.getElementById("disconnect");
+	disconnBtn.addEventListener('click', disconnect);
+	var sendBtn = document.getElementById("send");
+	var msg = document.getElementById("msg");
+	sendBtn.addEventListener("click", send);
+}
+
+function log(msg) {
+	var log = document.getElementById("log");
+	log.value = log.value + msg + "\n";
+}
+
+function send(){
+	if (ws) {
+		ws.send(msg.value);
+	}
+}
+function connect() {
+	var url = server.value;
+	log("trying to connect :" + url);
+	ws = new WebSocket(url);
+	log(ws.readyState);
+	ws.onopen = function(event) {
+		log("open");
+		ws.send("message to send");
+	}
+	ws.onmessage = function(event) {
+		log("msg:" + event.data + "\n");
+	}
+	ws.onclose = function(event) {
+		log("closed");
+	}
+	ws.error = function(event) {
+		log("error");
+	}
+}
+function disconnect(){
+	if (ws)	ws.close();
+}
+
+
+</script>
+</head>
+<body>
+<label for="server">Server:</label>
+	<input type="text" id="server" value="ws://echo.websocket.org"/>
+	<button id="connect">Connect</button>
+	<button id="disconnect">Disconnect</button><br/>
+	<label for="msg">Message:</label>
+	<input type="text" id="msg" value="Hello Websocket"/>
+	<button id="send">Send</button><br/>
+	<textarea id="log" rows="10" cols="50"></textarea>
+
+</body>
+</html>
