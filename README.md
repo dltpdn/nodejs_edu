@@ -11,6 +11,7 @@
 * JDK [http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html]
 * Eclipse JavaEE [http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html]
 * Visual Studio Build Tools [http://landinghub.visualstudio.com/visual-cpp-build-tools]
+* Python 2.7.x [https://www.python.org/downloads/]
 
 
 ###  참고 링크
