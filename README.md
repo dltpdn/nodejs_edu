@@ -12,7 +12,10 @@
 * Eclipse JavaEE [http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html]
 * Visual Studio Build Tools [http://landinghub.visualstudio.com/visual-cpp-build-tools]
 * Python 2.7.x [https://www.python.org/downloads/]
+* MySQL [https://dev.mysql.com/downloads/windows/installer/5.7.html]
+* MongoDB[https://www.mongodb.com/download-center?jmp=nav#previous]
 
 
 ###  참고 링크
 * Event Loop Visualization : [http://latentflip.com/loupe]
+* openssl for windows :[https://code.google.com/archive/p/openssl-for-windows/downloads]
