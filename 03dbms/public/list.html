@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Board List</h1>
+	<a href="/insert">ADD</a>
+	<hr/>
+	<table width="100%" border="1">
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+			<th>Writer</th>
+		</tr>
+		<% data.forEach(function(item, idx) { %>
+		<tr>
+			<td><%=item.id%></td>
+			<td><a href="/detail/<%=item.id%>"><%=item.title%></a></td>
+			<td><%=item.writer%></td>
+		</tr>
+		<% }); %>
+	</table>
+</body>
+</html>

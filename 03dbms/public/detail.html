@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Board Detail</h1>
+<a href="/edit/<%=item.id%>">EDIT</a>
+<a href="/delete/<%=item.id%>">DELETE</a>
+<hr/>
+<table border="1" width="100%">
+	<tr><td width="30%">ID</td><td><%=item.id%></td></tr>
+	<tr><td>Title</td><td><%=item.title%></td></tr>
+	<tr><td colspan="2">Content</td></tr>
+	<tr><td colspan="2"><%=item.content%></td></tr>
+	<tr><td>writer</td><td><%=item.writer%></td></tr>
+</table>
+</body>
+</html>

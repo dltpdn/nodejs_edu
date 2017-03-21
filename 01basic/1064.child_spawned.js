@@ -6,5 +6,5 @@ process.stdin.on('data', function(data) {
 
 process.on('SIGTERM', function() {
 	console.log('child SIGTERM');
-	process.exit(0);
+	process.exit(1);
 });

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+input, textarea{
+	width:95%;
+	padding:5px;
+	margin:5px;
+}
+textarea{ height: 200px;}
+</style>
+</head>
+<body>
+<h1>Board Detail</h1>
+<form name="save_form" method="POST" action="/save/0">
+<input type="hidden" name="mode" value="insert"/>
+<a href="javascript:document.save_form.submit()">SAVE</a>
+<a href="/">Cancel</a>
+<hr/>
+
+<table border="1" width="100%">
+	<tr><td width="30%">ID</td><td><input name="id"   readonly="readonly"></td></tr>
+	<tr><td>Title</td><td><input name="title" ></td></tr>
+	<tr><td colspan="2"></td></tr>
+	<tr><td colspan="2"><textarea name="content" ></textarea></td></tr>
+	<tr><td>writer</td><td><input name="writer" ></td></tr>
+</table>
+</form>
+</body>
+</html>
