@@ -16,4 +16,4 @@ db.board.find(function(err, docs){
    }
 });
 
-db.board.insert({_id:4, title:'title4', content :'content4', writer :'kkk'});
+db.board.insert({title:'title4', content :'content4', writer :'kkk'});
