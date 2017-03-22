@@ -14,14 +14,14 @@ textarea{ height: 200px;}
 </head>
 <body>
 <h1>Board Detail</h1>
-<form name="save_form" method="POST" action="/save/<%=item.id%>">
+<form name="save_form" method="POST" action="/save/<%=item._id%>">
 <input type="hidden" name="mode" value="edit"/>
 <a href="javascript:document.save_form.submit()">SAVE</a>
 <a href="/detail/<%=item.id%>">Cancel</a>
 <hr/>
 
 <table border="1" width="100%">
-	<tr><td width="30%">ID</td><td><input name="id" value="<%=item.id%>"  readonly="readonly"></td></tr>
+	<tr><td width="30%">ID</td><td><input name="id" value="<%=item._id%>"  readonly="readonly"></td></tr>
 	<tr><td>Title</td><td><input name="title" value="<%=item.title%>"></td></tr>
 	<tr><td colspan="2"></td></tr>
 	<tr><td colspan="2"><textarea name="content" ><%=item.content%></textarea></td></tr>

@@ -1,66 +1,64 @@
 var express = require('express');
 var ejs = require('ejs');
 var fs = require('fs');
-var mysql = require('mysql');
 var bodyParser = require('body-parser');
+var mongojs = require('mongojs');
 
-var app = express();
-app.use(express.static(__dirname + '/public'));
+var db = mongojs('172.30.1.49/test', ['board']);
+db.on('error', function(err){
+   console.log(err);
+});
+db.on('connect', function(){
+   console.log('connet.');
+});
+var app = express(); 
 app.use(bodyParser.urlencoded({extended:false}));
-var conn = mysql.createConnection({
-	host : '172.30.1.49',
-	user : 'root',
-	password : 'admin',
-	database : 'test'
-});
-conn.connect(function(err) {
-	if (err) {
-		console.log(err);
-	}
-});
-
 app.get('/', function(req, res){
 	fs.readFile(__dirname +'/public/list.html', 'utf8', function(err, data){
-		conn.query('SELECT * FROM board', function(err, rs, field){
-			console.log(rs);
-			res.send(ejs.render(data, {data:rs}));
+		db.board.find(function(err, docs){
+		   console.log(arguments);
+		   res.send(ejs.render(data, {data:docs}));
 		});
 	});
-	
 });
 
 app.get('/insert', function(req, res){
 	res.redirect('/insert.html');
 });
 
+
 app.get('/detail/:id', function(req, res){
 	fs.readFile(__dirname +'/public/detail.html', 'utf8', function(err, data){
 		console.log(req.params.id);
-		conn.query('SELECT * FROM board WHERE _id=?',[req.params.id], function(err, rs, field){
-			console.log(rs);
-			res.send(ejs.render(data, {item:rs[0]}));
+		db.board.find({_id:mongojs.ObjectId(req.params.id)}, function(err, docs){
+			console.log(docs);
+			res.send(ejs.render(data, {item:docs[0]}));
 		});
 	});
 });
 
+
 app.get('/edit/:id', function(req, res){
 	fs.readFile(__dirname +'/public/edit.html', 'utf8', function(err, data){
 		console.log(req.params.id);
-		conn.query('SELECT * FROM board WHERE _id=?',[req.params.id], function(err, rs, field){
-			console.log(rs);
-			res.send(ejs.render(data, {item:rs[0]}));
+		db.board.find({_id:mongojs.ObjectId(req.params.id)}, function(err, docs){
+			console.log(docs);
+			res.send(ejs.render(data, {item:docs[0]}));
 		});
 	});
 });
 
 app.post('/save/:id', function(req, res, next){
+	console.log('save!!!');
 	var id = req.params.id;
 	var title = req.param('title');
 	var content = req.param('content');
 	var writer = req.param('writer');
 	var mode = req.param('mode');
+	console.log('mode',mode);
 	if(mode === 'edit'){
-		conn.query('UPDATE board SET title=?, content=?, writer=? WHERE _id=?', [title, content, writer, id], function(err, rs, field){
+		console.log('edit');
+		db.board.update({_id:mongojs.ObjectId(id)}, {$set:{title:title, content:content, writer:writer}}, function(err, docs){
 			console.log(arguments);
 			if(!err){
 				res.redirect('/');
@@ -69,7 +67,8 @@ app.post('/save/:id', function(req, res, next){
 			}
 		});
 	}else if(mode=== 'insert'){
-		conn.query('INSERT INTO board(title, content, writer) VALUES(?,?,?)', [title, content, writer], function(err, rs, field){
+		console.log('insert');
+		db.board.insert({title: title, content:content, writer:writer}, function(err, docs){
 			if(!err){
 				res.redirect('/');
 			}else{
@@ -81,7 +80,7 @@ app.post('/save/:id', function(req, res, next){
 
 app.get('/delete/:id', function(req, res, next){
 	var id = req.params.id;
-	conn.query('DELETE FROM board WHERE _id=?', [id], function(err, rs, field){
+	db.board.remove({_id:mongojs.ObjectId(id)}, function(err){
 		if(!err){
 			res.redirect('/');
 		}else{
@@ -90,10 +89,9 @@ app.get('/delete/:id', function(req, res, next){
 	});
 });
 
-//app.use(function(err, req, res, next){
-//	res.status(500).send('500 Internal Server Error:'+ err.message);
-//});
+app.use(express.static(__dirname + '/public'));
+
 
 app.listen(8080, function(){
-	console.log('server on 8080.')
+	console.log('server on 8080');
 });

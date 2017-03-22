@@ -16,8 +16,8 @@
 		</tr>
 		<% data.forEach(function(item, idx) { %>
 		<tr>
-			<td><%=item.id%></td>
-			<td><a href="/detail/<%=item.id%>"><%=item.title%></a></td>
+			<td><%=item._id%></td>
+			<td><a href="/detail/<%=item._id%>"><%=item.title%></a></td>
 			<td><%=item.writer%></td>
 		</tr>
 		<% }); %>
