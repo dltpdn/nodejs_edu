@@ -2,14 +2,23 @@
 
 # NodeJs Education Course
 안녕하세요? 이세우입니다.
+
 이 Repository는 Nodejs교육을 위해 만들었습니다.
+
 교육 중이나 교육 이후에도 필요하면 지속적으로 수정되고, 특별한 이유 없이 사라지지 않을 겁니다.
+
 여기서 제공하는 코드 이외에 필요한 프로그램은 아래에 링크와 위키 페이지를 참조하세요.
 
+
+
 Welcome to my NodeJs eduction course!
+
 I am Lee Sewoo, the lecturer of this course.
+
 I created this repository for my NodeJs training.
+
 This repository can be changed during you are in this course or completed, and it will not be destroyed by me.
+
 See the links below and the wiki pages to get program files that are not available here.
 
 ## 강사 소개(About Instructor)
