@@ -14,7 +14,7 @@
 	* Blog : http://blog.xcoda.net
 
 
-##  Software Download List
+## S/W Download List
 * nodejs[https://nodejs.org/en/]
 * JDK [http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html]
 * Eclipse JavaEE [http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html]
@@ -24,9 +24,9 @@
 * MongoDB[https://www.mongodb.com/download-center?jmp=nav#previous]
 
 
-##  참고 링크
+## 참고 링크(Links for outter sites)
 * Event Loop Visualization : [http://latentflip.com/loupe]
 * openssl for windows :[https://code.google.com/archive/p/openssl-for-windows/downloads]
 
-## Wiki Pages
+## Documents
 [Wiki Home](https://github.com/dltpdn/nodejs_edu/wiki)
