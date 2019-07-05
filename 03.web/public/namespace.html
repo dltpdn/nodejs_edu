@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+	let btnRoot = document.querySelector('#btn_root');
+	let btns1 = document.querySelector('#btn_space1');
+	let btns2 = document.querySelector('#btn_space2');
+	
+	btnRoot.onclick = function(){
+		let socket = io.connect();
+		socket.on('message', function(data){
+			console.log('/:', data);
+			document.querySelector('#msg').innerHTML += ('/:' + data + '\r');
+		});
+	}
+	btns1.onclick = function(){
+		let socket = io.connect('/nsp1');
+		socket.on('message', function(data){
+			console.log('/nsp1:', data);
+			document.querySelector('#msg').innerHTML += ('nsp1:' + data + '\r');
+		});
+	}
+	btns2.onclick = function(){
+		let socket = io.connect('/nsp2');
+		socket.on('message', function(data){
+			console.log('/nsp2:', data);
+			document.querySelector('#msg').innerHTML +=  ('nsp2:' + data + '\r');
+		});
+	}
+
+};
+
+</script>
+</head>
+<body>
+	<h1>WebSocket(Socket.IO) Namespace example.</h1>
+	<button id='btn_root'>conn to '/'</button>
+	<button id='btn_space1'>conn to '/space1'</button>
+	<button id='btn_space2'>conn to '/space2'</button>
+	<div>
+	<textarea id='msg' rows="10" cols="50"></textarea>
+	</div>
+</body>
+</html>

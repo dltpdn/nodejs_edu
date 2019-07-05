@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+let socket = io.connect();
+socket.on('connect', function(){
+	console.log('ws connected.');
+	document.querySelector('#log').innerHTML += ('ws connected.'+ '\r');
+	socket.on('msg', function(data){
+		log.innerHTML += (data + '\r');
+	});
+});
+
+
+window.onload=function(){
+	let btnjoin = document.querySelector('#btn_join');
+	let btnleave = document.querySelector('#btn_leave');
+	let btnsend = document.querySelector('#btn_send');
+	let btnall = document.querySelector('#btn_all');
+	let input = document.querySelector('#msg')
+	let selroom = document.querySelector('#room');
+	let log = document.querySelector('#log');
+	
+	
+	btnjoin.onclick = function(){
+		let room = selroom.value;
+		console.log(room, 'join');
+		socket.emit('join', room);
+	}
+	btnleave.onclick = function(){
+		let room = selroom.value;
+		console.log(room, 'leave');
+		socket.emit('leave', room);
+	}
+	btnsend.onclick = function(){
+		let msg = input.value;
+		console.log('send', msg);
+		socket.emit('msg', {room:selroom.value, msg:msg});
+	}
+	btnall.onclick = function(){
+		let msg = input.value;
+		console.log('broadcast', msg);
+		socket.emit('broadcast', msg);
+	}
+
+};
+
+</script>
+</head>
+<body>
+	<h1>WebSocket(Socket.IO) Room example.</h1>
+	<select id='room'>
+		<option value='r1'>Room1</option>
+		<option value='r2'>Room2</option>
+	</select>
+	<button id='btn_join'>Join</button>
+	<button id='btn_leave'>Leave</button>
+	<div>
+	<textarea id='log' rows="10" cols="50"></textarea>
+	</div>
+	<input type="text" id="msg"/>
+	<button id='btn_send'>send</button>
+	<button id='btn_all'>bradcast</button>
+</body>
+</html>

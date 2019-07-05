@@ -1,1 +1,0 @@
-file write test with POSIX like API.
